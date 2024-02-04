@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:new_flutter/pages/first.dart';
+import 'package:new_flutter/pages/second.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Message(),
+      routes: {
+        "/": (context) => const Message(),
+        "/first": (context) => const FirstPage(),
+        "/second": (context) => const SecondPage(),
+      },
     );
   }
 }
@@ -30,12 +36,52 @@ class Message extends StatelessWidget {
         title: const Text("Setting Yannick"),
       ),
       body: Center(
-        child: TextButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(("I'm a sanckbar"))));
-            },
-            child: Text("Snackbar")),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text(("I'm a snckbar"))));
+                },
+                child: const Text("Snackbar")),
+            TextButton(
+                // onPressed: () {
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const FirstPage()));
+                // },
+
+                // onPressed: () {
+                //   Navigator.of(context).pushNamed("/first");
+                // },
+
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const FirstPage(name: "Yannick")));
+                },
+                child: const Text("First page")),
+            TextButton(
+                // onPressed: () {
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const SecondPage()));
+                // },
+
+                // onPressed: () {
+                //   Navigator.pushNamed(context, "/second");
+                // },
+                onPressed: () {
+                  Navigator.pushNamed(context, "/second", arguments: "Berty");
+                },
+                child: const Text("Second page")),
+          ],
+        ),
       ),
     );
   }
