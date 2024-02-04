@@ -15,7 +15,77 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Message(),
+    );
+  }
+}
+
+class Message extends StatelessWidget {
+  const Message({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Setting Yannick"),
+      ),
+      body: Center(
+        child: TextButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(("I'm a sanckbar"))));
+            },
+            child: Text("Snackbar")),
+      ),
+    );
+  }
+}
+
+class Forms extends StatefulWidget {
+  const Forms({Key? key}) : super(key: key);
+
+  @override
+  _FormsState createState() => _FormsState();
+}
+
+class _FormsState extends State<Forms> {
+  bool value = true;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Setting Yannick"),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.network("https://picsum.photos/200/200"),
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Username'),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Notifications  "),
+                Switch(
+                    value: value,
+                    onChanged: (newValue) {
+                      setState(() {
+                        value = newValue;
+                      });
+                    }),
+              ],
+            ),
+            ElevatedButton(onPressed: () {}, child: const Text("Save"))
+          ],
+        ),
+      ),
     );
   }
 }
