@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:new_flutter/carouseldots.dart';
+import 'package:new_flutter/pages/authscreen.dart';
 import 'package:new_flutter/pages/first.dart';
 import 'package:new_flutter/pages/second.dart';
+import 'package:new_flutter/splashscreen.dart';
+import 'package:new_flutter/widgets/numeric_keybad.dart';
+
+import 'dart:async';
+
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,10 +26,63 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => const Message(),
+        "/": (context) => const SplashScreen(),
+        "/code": (context) => UnderscoreCodeInput(),
+        "/auth": (context) => const AuthScreen(),
+        "/message": (context) => const Message(),
         "/first": (context) => const FirstPage(),
         "/second": (context) => const SecondPage(),
+        "/home": (context) => const Home(),
+        "/dot": (context) => const Carouseldots(),
       },
+    );
+  }
+}
+
+class UnderscoreCodeInput extends StatefulWidget {
+  @override
+  _UnderscoreCodeInputState createState() => _UnderscoreCodeInputState();
+}
+
+class _UnderscoreCodeInputState extends State<UnderscoreCodeInput> {
+  String enteredPin = '';
+
+  void handlePinCodeChanges(String value) {
+    setState(() {
+      enteredPin = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: PinCodeTextField(
+            appContext: context,
+            length: 4,
+            onChanged: handlePinCodeChanges,
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.underline,
+              inactiveColor: Colors.grey,
+              activeColor: Colors.black,
+              selectedColor: Colors.black,
+            ),
+            textStyle: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+            keyboardType: TextInputType.number,
+          ),
+        ),
+        SizedBox(height: 16),
+        Text(
+          'Entered Pin Code: $enteredPin',
+          style: TextStyle(fontSize: 16),
+        ),
+      ],
     );
   }
 }
@@ -36,51 +97,74 @@ class Message extends StatelessWidget {
         title: const Text("Setting Yannick"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(("I'm a snckbar"))));
-                },
-                child: const Text("Snackbar")),
-            TextButton(
-                // onPressed: () {
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => const FirstPage()));
-                // },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              UnderscoreCodeInput(),
+              TextButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text(("I'm a snckbar"))));
+                  },
+                  child: const Text("Snackbar")),
+              TextButton(
+                  // onPressed: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const FirstPage()));
+                  // },
 
-                // onPressed: () {
-                //   Navigator.of(context).pushNamed("/first");
-                // },
+                  // onPressed: () {
+                  //   Navigator.of(context).pushNamed("/first");
+                  // },
 
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const FirstPage(name: "Yannick")));
-                },
-                child: const Text("First page")),
-            TextButton(
-                // onPressed: () {
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => const SecondPage()));
-                // },
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const FirstPage(name: "Yannick")));
+                  },
+                  child: const Text("First page")),
+              TextButton(
+                  // onPressed: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const SecondPage()));
+                  // },
 
-                // onPressed: () {
-                //   Navigator.pushNamed(context, "/second");
-                // },
-                onPressed: () {
-                  Navigator.pushNamed(context, "/second", arguments: "Berty");
-                },
-                child: const Text("Second page")),
-          ],
+                  // onPressed: () {
+                  //   Navigator.pushNamed(context, "/second");
+                  // },
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/second", arguments: "Berty");
+                  },
+                  child: const Text("Second page")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/demo");
+                  },
+                  child: const Text("Demo Input")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/auth");
+                  },
+                  child: const Text("Auth")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/home");
+                  },
+                  child: const Text("Home")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/dot");
+                  },
+                  child: const Text("Carousel")),
+            ],
+          ),
         ),
       ),
     );
@@ -136,48 +220,27 @@ class _FormsState extends State<Forms> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController textController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
+      appBar: AppBar(),
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            TextField(
+              controller: textController,
+              keyboardType: TextInputType.none,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const Spacer(),
+            NumericKeypad(
+              controller: textController,
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
