@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Image(
-              image: AssetImage("assets/Logo color@findme 2.png"),
+              image: AssetImage("assets/Rectangle.png"),
             ),
             Text(
               "Splash Screen",

@@ -24,7 +24,7 @@ class _FirstPageState extends State<FirstPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset(
-                'assets/Rectangle.png', // Replace with your image path
+                'assets/Rectangle.png',
                 height: 200,
                 fit: BoxFit.cover,
               ),

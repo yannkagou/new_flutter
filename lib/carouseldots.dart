@@ -15,9 +15,19 @@ class _CarouseldotsState extends State<Carouseldots> {
   late CarouselController carouselController2;
 
   List itemsList = [
-    {'image': 'assets/besoin adresse 1.png', 'text': "Je m'appelle yannick"},
-    {'image': 'assets/besoin adresse 1.png', 'text': "Je m'appelle bertrand"},
-    {'image': 'assets/Page1_image 1.png', 'text': "Je m'appelle Kagou"},
+    {
+      'image': 'assets/Rectangle.png',
+      'text':
+          "Avec FindMe, générez l’adresse postale de votre domicile ou entreprise en 2 minutes"
+    },
+    {
+      'image': 'assets/Rectangle.png',
+      'text': "Avec FindMe, obtenez votre plan de localisation postal certifié"
+    },
+    {
+      'image': 'assets/Rectangle.png',
+      'text': "Avec FindMe, demandez et recevez une plaque d’adressage poastal"
+    },
   ];
 
   int currentIndex = 0;

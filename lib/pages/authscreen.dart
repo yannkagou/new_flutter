@@ -19,7 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
       child: Column(
         children: [
-          Image(image: AssetImage("assets/besoin adresse 1.png")),
+          Image(image: AssetImage("assets/Rectangle.png")),
           Text(
               "Avec FindMe, obtenez votre plan de localisation postal certifiee"),
           ElevatedButton(
