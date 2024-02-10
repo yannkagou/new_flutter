@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:new_flutter/pages/first.dart';
 import 'package:new_flutter/pages/second.dart';
+import 'package:new_flutter/pages/third.dart';
 import 'package:new_flutter/splashscreen.dart';
 
 // Riverpod has multiple providers
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         "/message": (context) => const Message(),
         "/first": (context) => const FirstPage(),
         "/second": (context) => const SecondPage(),
+        "/third": (context) => const ThirdPage(),
       },
     );
   }
@@ -94,6 +96,11 @@ class Message extends StatelessWidget {
                     Navigator.pushNamed(context, "/second", arguments: "Berty");
                   },
                   child: const Text("Second page")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/third");
+                  },
+                  child: const Text("Third Page")),
             ],
           ),
         ),
