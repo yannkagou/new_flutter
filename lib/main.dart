@@ -9,9 +9,13 @@ import 'package:new_flutter/splashscreen.dart';
 
 // 1- Provider: It's a read only value
 
+// 2- StateProvider
+
 final nameProvider = Provider((ref) {
   return 'Yannick';
 });
+
+final nameStateProvider = StateProvider<String?>((ref) => 'Yann');
 
 void main() {
   runApp(
