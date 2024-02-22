@@ -26,16 +26,19 @@ class ThirdPage extends StatelessWidget {
       body: Consumer(builder: (context, ref, child) {
         final name = ref.watch(nameProvider);
         final firstname = ref.watch(nameStateProvider) ?? '';
-        return Column(
-          children: [
-            Text(name),
-            Text(firstname),
-            TextField(
-              onSubmitted: (value) {
-                ref.read(nameStateProvider.notifier).update((state) => value);
-              },
-            )
-          ],
+        return SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(name),
+              Text(firstname),
+              TextField(
+                onSubmitted: (value) {
+                  ref.read(nameStateProvider.notifier).update((state) => value);
+                },
+              )
+            ],
+          ),
         );
       }),
     );

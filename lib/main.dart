@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:new_flutter/pages/first.dart';
+import 'package:new_flutter/pages/fourth.dart';
 import 'package:new_flutter/pages/second.dart';
 import 'package:new_flutter/pages/third.dart';
 import 'package:new_flutter/splashscreen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         "/first": (context) => const FirstPage(),
         "/second": (context) => const SecondPage(),
         "/third": (context) => const ThirdPage(),
+        "/fourth": (context) => const Fourth(),
       },
     );
   }
@@ -105,6 +107,11 @@ class Message extends StatelessWidget {
                     Navigator.pushNamed(context, "/third");
                   },
                   child: const Text("Third Page")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/fourth");
+                  },
+                  child: const Text("Fourth Page")),
             ],
           ),
         ),
